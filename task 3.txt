@@ -1,0 +1,56 @@
+Task 3: Review the Following Code
+
+Suggestion for improvements:
+
+1. Using a dictionary where the key is the transaction ID can significantly improve the performance of search operations.
+
+2. Using LINQ can simplify search operations, making the code more readable and concise.
+
+3. Check whether the ID list or transaction object provided as input is null or empty before performing operations.
+
+Code suggestion:
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class TransactionService
+{
+    private readonly Dictionary<string, Transaction> _transactions = new Dictionary<string, Transaction>();
+
+    public List<Transaction> GetTransactionsByIdList(List<string> idList)
+    {
+        if (idList == null || !idList.Any())
+            return new List<Transaction>();
+
+        return _transactions.Where(t => idList.Contains(t.Key))
+                           .Select(t => t.Value)
+                           .ToList();
+    }
+
+    public Transaction GetTransactionById(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+            return null;
+
+        _transactions.TryGetValue(id, out Transaction transaction);
+        return transaction;
+    }
+
+    public void AddTransaction(Transaction transaction)
+    {
+        if (transaction == null || string.IsNullOrEmpty(transaction.Id))
+            throw new ArgumentException("Transaction or transaction ID cannot be null or empty");
+
+        _transactions[transaction.Id] = transaction;
+    }
+
+    public void RemoveTransaction(string id)
+    {
+        if (string.IsNullOrEmpty(id))
+            return;
+
+        _transactions.Remove(id);
+    }
+}
+

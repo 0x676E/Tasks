@@ -1,0 +1,21 @@
+This algorithm checks if a given string is a palindrome. A palindrome is a word, phrase, number, or other sequence of characters that reads the same forward and backward (ignoring spaces, punctuation, and capitalization).
+
+Explanation of how the algorithm works:
+
+    Cleaning the Input String:
+        First, we clean the input string by removing all non-alphanumeric characters and converting all letters to lowercase. This step ensures that we only consider the alphanumeric characters for palindrome checking and ignore case sensitivity.
+
+    Recursive Approach:
+        The core of the algorithm is a recursive function that compares characters from both ends of the string towards the center.
+        At each step of the recursion, we compare the characters at the current positions of the left and right pointers.
+        If the characters match, we recursively move the pointers inward and continue the comparison.
+        If the characters don't match, we immediately return false, indicating that the string is not a palindrome.
+
+    Base Case:
+        The recursion stops when the left pointer becomes greater than or equal to the right pointer.
+        This condition indicates that we have either reached the middle character (in case of odd-length strings) or crossed it (in case of even-length strings).
+        If all characters have been compared and matched, we return true, indicating that the string is a palindrome.
+
+    Overall Efficiency:
+        The algorithm is efficient in terms of time and space complexity because it operates directly on the input string without creating additional copies or data structures.
+        Additionally, the use of recursion allows for a concise and elegant solution to the palindrome-checking problem.
